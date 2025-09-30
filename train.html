@@ -1,110 +1,151 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Time Train</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Portal Intro</title>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    background:linear-gradient(#000010,#000);
-    overflow:hidden;
-    font-family:'Poppins',sans-serif;
-    color:#fff;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    position:relative;
-  }
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{
+  height:100%;
+  background:#000;
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  color:#fff;
+  text-align:center;
+}
 
-  /* Moving clouds/stars background */
-  .sky{
-    position:absolute;
-    top:0;left:0;width:200%;height:100%;
-    background:
-      url('https://i.ibb.co/98PrxX8/stars.png') repeat,
-      radial-gradient(#000015,#000);
-    background-size:contain;
-    animation:skyMove 40s linear infinite;
-    z-index:0;
-  }
-  @keyframes skyMove{
-    0%{transform:translateX(0);}
-    100%{transform:translateX(-50%);}
-  }
+/* Typing lines */
+.line{
+  font-size:2.2rem;
+  margin:15px 0;
+  white-space:nowrap;
+  border-right:2px solid #fff;
+  display:inline-block;
+}
 
-  h1{
-    z-index:1;
-    font-size:clamp(28px,6vw,60px);
-    font-weight:900;
-    text-shadow:0 0 30px #00f6ff;
-    margin-bottom:40px;
-    text-align:center;
-  }
+/* Energy circle */
+.portal{
+  position:absolute;
+  top:60%;left:50%;
+  width:320px;height:320px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  border:6px solid rgba(255,180,0,0.9);
+  box-shadow:0 0 40px #ffae00, inset 0 0 40px #ff6a00;
+  opacity:0;
+}
 
-  .train-track{
-    position:absolute;
-    bottom:40px;
-    width:100%;
-    height:120px;
-    overflow:hidden;
-  }
-  .train{
-    position:absolute;
-    left:-400px;
-    bottom:0;
-    width:350px;
-    font-size:80px;
-    text-align:center;
-    white-space:nowrap;
-  }
-  /* Train moves when boarded */
-  .moveTrain{animation:trainMove 6s linear forwards;}
-  @keyframes trainMove{
-    0%{left:-400px;}
-    100%{left:calc(100% + 400px);}
-  }
+/* Background collage */
+.bg{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:url('photo11.jpg') center/cover no-repeat;
+  opacity:0;
+  filter:brightness(0.4);
+  transition:opacity 12s ease-in-out;
+}
 
-  .boardBtn{
-    z-index:1;
-    padding:16px 40px;
-    background:linear-gradient(135deg,#00f6ff,#4e9eff);
-    color:#000;
-    font-weight:700;
-    border:none;
-    border-radius:40px;
-    font-size:20px;
-    cursor:pointer;
-    transition:transform .2s, box-shadow .2s;
-    box-shadow:0 8px 25px rgba(0,246,255,.4);
-  }
-  .boardBtn:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,246,255,.6);}
+/* Blast effect overlay */
+#fadeOut{
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 3s ease-in-out;
+}
 </style>
 </head>
 <body>
 
-<div class="sky"></div>
-
-<h1>Board the Time Train<br>to Our Memories 🚂</h1>
-<button class="boardBtn" id="board">Click to Board</button>
-
-<div class="train-track">
-  <div class="train" id="train">
-    🚂💨💨
-  </div>
+<!-- Typing container -->
+<div id="typingBox" style="position:absolute;top:30%;left:50%;transform:translateX(-50%);">
+  <div class="line" id="line1"></div>
+  <div class="line" id="line2"></div>
+  <div class="line" id="line3"></div>
 </div>
 
+<!-- Energy portal -->
+<div class="portal" id="portal"></div>
+
+<!-- Background collage -->
+<div class="bg" id="bg"></div>
+
+<!-- Fade overlay -->
+<div id="fadeOut"></div>
+
+<!-- Audio -->
+<audio id="introAudio" src="intro.mp3"></audio>
+
 <script>
-const boardBtn=document.getElementById('board');
-const train=document.getElementById('train');
-boardBtn.onclick=()=>{
-  boardBtn.style.display="none";
-  train.classList.add('moveTrain');
-  setTimeout(()=>{ window.location.href="memories.html"; },6000); // 6 sec ride
-};
+const lines = [
+  "It’s time to",
+  "board the train",
+  "of memories"
+];
+const ids = ["line1","line2","line3"];
+let currentLine = 0;
+let charIndex = 0;
+let spinInterval, angle=0, speed=0.5;
+
+function playAudio(){
+  const audio = document.getElementById('introAudio');
+  audio.play().catch(()=>{
+    document.body.addEventListener('click',()=>audio.play(),{once:true});
+  });
+}
+
+// Typewriter effect (multi-line)
+function typeLine(){
+  if(currentLine < lines.length){
+    const el = document.getElementById(ids[currentLine]);
+    if(charIndex < lines[currentLine].length){
+      el.textContent += lines[currentLine].charAt(charIndex);
+      charIndex++;
+      setTimeout(typeLine,100);
+    }else{
+      el.style.borderRight='none';
+      currentLine++;
+      charIndex=0;
+      setTimeout(typeLine,800);
+    }
+  }else{
+    setTimeout(startPortal,1500);
+  }
+}
+typeLine();
+
+function startPortal(){
+  playAudio();
+  // Hide typing text
+  document.getElementById('typingBox').style.display='none';
+
+  const portal=document.getElementById('portal');
+  portal.style.opacity='1';
+
+  // Start spin with increasing speed
+  spinInterval = setInterval(()=>{
+    angle += speed;
+    speed += 0.1; // accelerate
+    portal.style.transform = `translate(-50%,-50%) rotate(${angle}deg) scale(1)`;
+  },30);
+
+  // Background fade-in
+  setTimeout(()=>{ document.getElementById('bg').style.opacity='1'; },1000);
+
+  // Blast after ~15s
+  setTimeout(()=>{
+    clearInterval(spinInterval);
+    // Huge scale + fade to mimic blast
+    portal.style.transition='transform 1.5s ease-out, opacity 1.5s ease-out';
+    portal.style.transform='translate(-50%,-50%) scale(8)';
+    portal.style.opacity='0';
+    // Black overlay
+    document.getElementById('fadeOut').style.opacity='1';
+    setTimeout(()=>{ window.location.href='memories.html'; },3000);
+  },15000);
+}
 </script>
 
 </body>
