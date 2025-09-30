@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Time Train</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:linear-gradient(#000010,#000);
+    overflow:hidden;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    position:relative;
+  }
+
+  /* Moving clouds/stars background */
+  .sky{
+    position:absolute;
+    top:0;left:0;width:200%;height:100%;
+    background:
+      url('https://i.ibb.co/98PrxX8/stars.png') repeat,
+      radial-gradient(#000015,#000);
+    background-size:contain;
+    animation:skyMove 40s linear infinite;
+    z-index:0;
+  }
+  @keyframes skyMove{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  h1{
+    z-index:1;
+    font-size:clamp(28px,6vw,60px);
+    font-weight:900;
+    text-shadow:0 0 30px #00f6ff;
+    margin-bottom:40px;
+    text-align:center;
+  }
+
+  .train-track{
+    position:absolute;
+    bottom:40px;
+    width:100%;
+    height:120px;
+    overflow:hidden;
+  }
+  .train{
+    position:absolute;
+    left:-400px;
+    bottom:0;
+    width:350px;
+    font-size:80px;
+    text-align:center;
+    white-space:nowrap;
+  }
+  /* Train moves when boarded */
+  .moveTrain{animation:trainMove 6s linear forwards;}
+  @keyframes trainMove{
+    0%{left:-400px;}
+    100%{left:calc(100% + 400px);}
+  }
+
+  .boardBtn{
+    z-index:1;
+    padding:16px 40px;
+    background:linear-gradient(135deg,#00f6ff,#4e9eff);
+    color:#000;
+    font-weight:700;
+    border:none;
+    border-radius:40px;
+    font-size:20px;
+    cursor:pointer;
+    transition:transform .2s, box-shadow .2s;
+    box-shadow:0 8px 25px rgba(0,246,255,.4);
+  }
+  .boardBtn:hover{transform:translateY(-4px);box-shadow:0 12px 35px rgba(0,246,255,.6);}
+</style>
+</head>
+<body>
+
+<div class="sky"></div>
+
+<h1>Board the Time Train<br>to Our Memories 🚂</h1>
+<button class="boardBtn" id="board">Click to Board</button>
+
+<div class="train-track">
+  <div class="train" id="train">
+    🚂💨💨
+  </div>
+</div>
+
+<script>
+const boardBtn=document.getElementById('board');
+const train=document.getElementById('train');
+boardBtn.onclick=()=>{
+  boardBtn.style.display="none";
+  train.classList.add('moveTrain');
+  setTimeout(()=>{ window.location.href="memories.html"; },6000); // 6 sec ride
+};
+</script>
+
+</body>
+</html>
