@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Celebration Time</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:#000;
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;
+    overflow:hidden;
+  }
+  #countdown{
+    font-size:clamp(40px,20vw,160px);
+    font-weight:900;
+    color:#ff4fa3;
+    text-shadow:0 0 40px #ff4fa3;
+  }
+  #celebration{
+    display:none;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  #cakeImg{
+    width:320px;max-width:90%;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(255,79,163,.6);
+    margin-bottom:20px;
+  }
+  button{
+    padding:14px 30px;
+    font-size:20px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff4fa3,#ffb199);
+    color:#fff;font-weight:700;cursor:pointer;
+    box-shadow:0 8px 25px rgba(255,79,163,.4);
+    transition:transform .2s;
+  }
+  button:hover{transform:translateY(-4px);}
+  canvas{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+  a.link{color:#ffb199;margin-top:20px;text-decoration:underline;font-size:18px;display:block;}
+</style>
+</head>
+<body>
+
+<div id="countdown">15</div>
+
+<div id="celebration">
+  <img id="cakeImg" src="cake.png" alt="Birthday Cake">
+  <button id="cutBtn">Cut The Cake 🎂</button>
+  <a href="memories.html" class="link">Go To Memories ➡️</a>
+</div>
+
+<audio id="song" src="Standard recording 2.mp3" preload="auto"></audio>
+<canvas id="confetti"></canvas>
+
+<script>
+const cd = document.getElementById('countdown');
+const celeb = document.getElementById('celebration');
+const song = document.getElementById('song');
+const cutBtn = document.getElementById('cutBtn');
+const confettiCanvas = document.getElementById('confetti');
+const ctx = confettiCanvas.getContext('2d');
+function resize(){confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+
+let time=15;
+const timer=setInterval(()=>{
+  time--;
+  cd.textContent=time;
+  if(time<=0){clearInterval(timer);startCelebration();}
+},1000);
+
+function startCelebration(){
+  cd.style.display="none";
+  celeb.style.display="flex";
+  try{song.play();}catch(e){}
+  launchConfetti();
+}
+
+function launchConfetti(){
+  const parts=[];
+  for(let i=0;i<150;i++){
+    parts.push({
+      x:Math.random()*confettiCanvas.width,
+      y:Math.random()*confettiCanvas.height - confettiCanvas.height,
+      w:6+Math.random()*8,h:8+Math.random()*8,
+      vx:(Math.random()-0.5)*2,vy:2+Math.random()*4,
+      color:`hsl(${Math.random()*360},90%,60%)`
+    });
+  }
+  function step(){
+    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+    for(const p of parts){
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.y>confettiCanvas.height){p.y=-10;p.x=Math.random()*confettiCanvas.width;}
+      ctx.fillStyle=p.color;
+      ctx.fillRect(p.x,p.y,p.w,p.h);
+    }
+    requestAnimationFrame(step);
+  }
+  step();
+}
+cutBtn.onclick=()=>{ launchConfetti(); song.currentTime=0; song.play(); };
+</script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#ff9a9e; --bg2:#fecfef; --accent:#ff6a88; --glass: rgba(255,255,255,0.08);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:'Poppins',system-ui,Arial;}
+  body{
+    background: radial-gradient(circle at 10% 20%, #fff3f6 0%, transparent 15%),
+                linear-gradient(135deg,var(--bg1),var(--bg2));
+    display:flex;align-items:center;justify-content:center;padding:20px;
+  }
+  .site{
+    width:1100px; max-width:100%; border-radius:20px; padding:28px; position:relative;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+    box-shadow: 0 20px 60px rgba(0,0,0,0.22); overflow:hidden;
+    color:#fff;
+  }
+
+  /* header */
+  header{display:flex;gap:18px;align-items:center}
+  .avatar{width:96px;height:96px;border-radius:50%;overflow:hidden;border:5px solid rgba(255,255,255,0.14)}
+  .avatar img{width:100%;height:100%;object-fit:cover}
+  h1{margin:0;font-size:34px;letter-spacing:0.6px;text-shadow:0 10px 30px rgba(0,0,0,0.28)}
+  .sub{opacity:0.95;margin-top:6px;font-weight:600}
+
+  /* hero big countdown */
+  .hero{text-align:center;padding:34px 10px}
+  .label{font-weight:700;opacity:0.95}
+  .bigcount{font-size:96px;font-weight:800;margin:14px 0;letter-spacing:4px;text-shadow:0 18px 40px rgba(0,0,0,0.28)}
+  .note{opacity:0.95;margin-top:8px}
+
+  .controls{display:flex;gap:12px;justify-content:center;margin-top:18px}
+  .btn{border:0;padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:0 12px 28px rgba(0,0,0,0.16)}
+  .primary{background:linear-gradient(90deg,var(--accent),#ffb199);color:#fff}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.12);color:#fff}
+
+  /* cake popup */
+  #cakePopup{display:none;margin-top:22px;text-align:center;z-index:20}
+  #cakePopup img{width:420px;max-width:88%;border-radius:20px;box-shadow:0 24px 60px rgba(0,0,0,0.35)}
+  #cutCakeBtn{margin-top:16px;padding:12px 20px;border-radius:12px;border:0;background:#ff7aa3;color:#fff;font-weight:800;cursor:pointer}
+  #cakeMsg{margin-top:12px;font-weight:700;color:#fff}
+
+  /* confetti canvas */
+  #confetti{position:absolute;inset:0;pointer-events:none;z-index:50}
+
+  footer{display:flex;justify-content:space-between;align-items:center;margin-top:18px;color:#fff8;font-size:13px}
+  nav a{color:#fff;text-decoration:none;margin-right:12px;opacity:0.95;font-weight:600}
+  .small{opacity:0.9}
+
+  @media (max-width:760px){
+    .bigcount{font-size:44px}
+    header{gap:12px}
+    .avatar{width:64px;height:64px}
+    h1{font-size:20px}
+  }
+</style>
+</head>
+<body>
+  <div class="site" id="page">
+    <canvas id="confetti"></canvas>
+
+    <header>
+      <div class="avatar"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop" alt="avatar"></div>
+      <div>
+        <h1 id="title">Happy Birthday, Shreya 🎉</h1>
+        <div class="sub">Aaj raat khaas hai — countdown shuru karo aur surprise dekho.</div>
+      </div>
+      <div style="margin-left:auto">
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="memories.html">Memories</a>
+          <a href="friends.html">Wishes</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="hero">
+      <div class="label">Time left till midnight</div>
+      <div class="bigcount" id="bigCount">-- : -- : --</div>
+      <div class="note">Midnight pe cake popup, tumhari recorded wish aur confetti!</div>
+
+      <div class="controls">
+        <button class="btn primary" id="openNow">Open Surprise Now ✨</button>
+        <button class="btn ghost" id="playVoice">Play Voice Now 🎤</button>
+      </div>
+
+      <div style="margin-top:10px">
+        <button id="unlockBtn" style="display:none" class="btn primary">Tap to start celebration 🎉</button>
+      </div>
+
+      <div id="cakePopup">
+        <img id="cakeImg" src="https://images.unsplash.com/photo-1608198093002-ad4e0054848e?auto=format&fit=crop&w=1000&q=80" alt="cake">
+        <div><button id="cutCakeBtn">Cut Cake 🎂</button></div>
+        <div id="cakeMsg"></div>
+        <div style="margin-top:12px;color:#fff8">After you enjoy, go to <a href="memories.html" style="color:#fff;text-decoration:underline">Memories</a></div>
+      </div>
+    </div>
+
+    <audio id="birthdaySong" src="Standard recording 2.mp3" preload="auto"></audio>
+
+    <footer>
+      <div>Made with ❤️</div>
+      <div class="small" id="nowSmall"></div>
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const big = document.getElementById('bigCount');
+  const small = document.getElementById('nowSmall');
+  const cakePopup = document.getElementById('cakePopup');
+  const song = document.getElementById('birthdaySong');
+  const openNow = document.getElementById('openNow');
+  const playVoice = document.getElementById('playVoice');
+  const cutCake = document.getElementById('cutCakeBtn');
+  const unlock = document.getElementById('unlockBtn');
+
+  // format ms to HH : MM : SS
+  function fmt(ms){
+    if(ms <= 0) return "00 : 00 : 00";
+    const s = Math.floor(ms/1000);
+    const hh = Math.floor(s/3600);
+    const mm = Math.floor((s%3600)/60);
+    const ss = s%60;
+    return String(hh).padStart(2,'0') + ' : ' + String(mm).padStart(2,'0') + ' : ' + String(ss).padStart(2,'0');
+  }
+
+  function toMidnight(now){
+    const m = new Date(now);
+    m.setHours(24,0,0,0);
+    return m - now;
+  }
+
+  let t = setInterval(update,1000);
+  update();
+
+  function update(){
+    const now = new Date();
+    small.textContent = now.toLocaleString();
+    const diff = toMidnight(now);
+    big.textContent = fmt(diff);
+    if(diff <= 0){
+      clearInterval(t);
+      big.textContent = "🎉 IT'S TIME! 🎉";
+      triggerCelebration();
+    }
+  }
+
+  // confetti canvas routine
+  function launchConfetti(){
+    const c = document.getElementById('confetti');
+    const ctx = c.getContext('2d');
+    function resize(){ c.width = c.clientWidth; c.height = c.clientHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const parts = [];
+    for(let i=0;i<160;i++){
+      parts.push({
+        x:Math.random()*c.width,
+        y:Math.random()*-c.height,
+        w:6+Math.random()*12, h:8+Math.random()*12,
+        vx:(Math.random()-0.5)*2, vy:2+Math.random()*4,
+        rot:Math.random()*360, vr:(Math.random()-0.5)*0.3,
+        color:`hsl(${Math.random()*360},90%,60%)`
+      });
+    }
+    let frames=0;
+    function step(){
+      ctx.clearRect(0,0,c.width,c.height);
+      for(const p of parts){
+        p.x+=p.vx; p.y+=p.vy; p.rot+=p.vr;
+        ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+        ctx.fillStyle = p.color; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+        ctx.restore();
+        if(p.y > c.height + 60){ p.y = -20; p.x = Math.random()*c.width; }
+      }
+      frames++; if(frames < 700) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function triggerCelebration(){
+    cakePopup.style.display = 'block';
+    // play audio, handle autoplay block
+    song.currentTime = 0;
+    const p = song.play();
+    if(p !== undefined){
+      p.then(()=>{ launchConfetti(); }).catch(err=>{
+        // autoplay blocked
+        unlock.style.display = 'inline-block';
+        unlock.onclick = ()=>{ song.play().then(()=>{ unlock.style.display='none'; launchConfetti();}).catch(()=>{}); };
+      });
+    } else {
+      unlock.style.display = 'inline-block';
+    }
+  }
+
+  openNow.addEventListener('click', ()=>{ // manual open
+    clearInterval(t);
+    big.textContent = "🎉 SURPRISE! 🎉";
+    triggerCelebration();
+  });
+
+  playVoice.addEventListener('click', async ()=>{
+    try{ await song.play(); } catch(e){ unlock.style.display='inline-block'; }
+  });
+
+  cutCake.addEventListener('click', ()=>{
+    document.getElementById('cakeMsg').textContent = "🎉 Cake Cut! Happy Birthday Shreya 🎉";
+    song.volume = 0.75;
+    launchConfetti();
+    // optional: after 6s redirect to memories
+    setTimeout(()=> { window.location.href = 'memories.html'; }, 7000);
+  });
+
+  // try to unlock audio on first tap
+  document.addEventListener('click', function unlock(){ song.play().then(()=>song.pause()).catch(()=>{}); document.removeEventListener('click', unlock); }, {once:true});
+})();
+</script>
+</body>
+</html>
