@@ -1,4 +1,4 @@
-!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -6,119 +6,174 @@
 <title>Our Memories</title>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Montserrat,system-ui,Arial;background:#fff8;display:flex;align-items:flex-start;justify-content:center;padding:32px;}
-  .wrap{width:920px;max-width:96%;background:linear-gradient(180deg,rgba(255,255,255,0.98),#fff);border-radius:14px;padding:22px;box-shadow:0 20px 50px rgba(0,0,0,0.08);}
-  header{display:flex;justify-content:space-between;align-items:center}
-  header h2{margin:0;font-size:22px}
-  nav a{margin-left:12px;text-decoration:none;color:#333;font-weight:600}
-  .timeline{margin-top:18px}
-  .block{padding:18px;border-radius:12px;margin-bottom:18px;background:#fff;border:1px solid rgba(0,0,0,0.04);display:block;box-shadow:0 8px 20px rgba(0,0,0,0.03)}
-  .title{font-weight:700;font-size:18px;margin-bottom:8px}
-  .caption{color:#555;margin-top:8px;font-size:14px}
-  .photo{width:100%;border-radius:10px;display:block;object-fit:cover;max-height:420px}
-  .meta{margin-top:10px;color:#777;font-size:13px}
-  @media(max-width:680px){ .wrap{padding:12px} .title{font-size:16px} }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Montserrat,system-ui,Arial;
+    background:#000;                /* 🔥 Black background */
+    padding:20px;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:24px;
+  }
+  header h2{
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
+  }
+  nav a{
+    margin-left:16px;
+    text-decoration:none;
+    color:#ff9a9e;
+    font-weight:600;
+  }
+
+  .timeline{
+    width:100%;
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  .block{
+    background:#1a1a1a;             /* Dark card */
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:24px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .block:hover{
+    transform:translateY(-4px);
+    box-shadow:0 16px 40px rgba(0,0,0,0.6);
+  }
+
+  .title{
+    font-weight:700;
+    font-size:20px;
+    color:#fff;
+    margin-bottom:12px;
+  }
+  .photo{
+    width:100%;
+    border-radius:10px;
+    display:block;
+    object-fit:cover;
+    max-height:460px;
+  }
+  .caption{
+    color:#ddd;
+    margin-top:12px;
+    font-size:15px;
+    line-height:1.5;
+  }
+  .meta{
+    margin-top:8px;
+    color:#aaa;
+    font-size:13px;
+  }
+
+  @media(max-width:680px){
+    header h2{font-size:22px}
+    .title{font-size:18px}
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h2>Our Beautiful Journey</h2>
-      <div>
-        <a href="index.html">Home</a>
-        <a href="friends.html">Wishes</a>
-      </div>
-    </header>
+  <!-- 🔊 Background Music -->
+  <audio src="sound.mp3" autoplay loop></audio>
 
-    <div class="timeline">
-      <!-- 10 occasion blocks -->
-      <div class="block">
-        <div class="title">First Meeting ❤️</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1400&auto=format&fit=crop" alt="first meeting">
-        <div class="caption">Woh din yaad hai jab hum pehli baar mile the — sab kuch naya aur exciting.</div>
-        <div class="meta">Date: 12 Jan 2020 · Location: College Cafe</div>
-      </div>
+  <header>
+    <h2>Our Beautiful Journey</h2>
 
-      <div class="block">
-        <div class="title">Diwali Together ✨</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1548092372-1d8d5a4f23c4?q=80&w=1400&auto=format&fit=crop" alt="diwali">
-        <div class="caption">Diwali par saath roshniyan baanti aur bahut masti hui.</div>
-        <div class="meta">Date: 14 Nov 2020 · Home</div>
-      </div>
+  </header>
 
-      <div class="block">
-        <div class="title">Goa Trip 🌊</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1400&auto=format&fit=crop" alt="goa">
-        <div class="caption">Beach walks, sunset and endless laughter.</div>
-        <div class="meta">Date: 05 Apr 2021</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Birthday Celebration 🎂</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1400&auto=format&fit=crop" alt="bday">
-        <div class="caption">Tera pehla birthday jo humne surprise kiya tha — priceless.</div>
-        <div class="meta">Date: DD MMM YYYY</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Road Trip 🚗</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=1400&auto=format&fit=crop" alt="roadtrip">
-        <div class="caption">Spotify on, windows down — nikal pade the bas gaadi aur hum.</div>
-        <div class="meta">Date: 10 Sep 2021</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Festival of Colors (Holi) 🌈</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1524499982521-1ffd58dd89ea?q=80&w=1400&auto=format&fit=crop" alt="holi">
-        <div class="caption">Rangon me doobe hue yaadgar pal.</div>
-        <div class="meta">Date: 29 Mar 2022</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Anniversary Dinner 🥂</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?q=80&w=1400&auto=format&fit=crop" alt="dinner">
-        <div class="caption">A quiet candlelight dinner — bas hum dono.</div>
-        <div class="meta">Date: 02 Feb 2023</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Concert Night 🎶</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?q=80&w=1400&auto=format&fit=crop" alt="concert">
-        <div class="caption">Live music aur hum dono jumping on the beat.</div>
-        <div class="meta">Date: 18 Jul 2023</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Picnic Day 🧺</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1400&auto=format&fit=crop" alt="picnic">
-        <div class="caption">Simple food, big laughs and lazy afternoons.</div>
-        <div class="meta">Date: 12 Nov 2023</div>
-      </div>
-
-      <div class="block">
-        <div class="title">Random Day That Became Special 💫</div>
-        <img class="photo" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1400&auto=format&fit=crop" alt="random">
-        <div class="caption">Kuch bhi na tha, bas hum aur ek accha din.</div>
-        <div class="meta">Date: 01 Jan 2024</div>
-      </div>
-
+  <div class="timeline">
+    <!-- Occasion Blocks -->
+    <div class="block">
+      <div class="title">Cute Don ❤️</div>
+      <img class="photo" src="photo1.jpg.jpg" alt="Cute Don">
+      <div class="caption">yrrr kitne cute lg rhe chotu se 🥰 mai utha ke bhag jaunga smbhl ke rhna.</div>
+      <div class="meta"></div>
     </div>
-  </div>
 
-<script>
-  // Optional: simple fade-in on scroll
-  const blocks = document.querySelectorAll('.block');
-  function reveal(){
-    const top = window.innerHeight*0.85;
-    blocks.forEach(b=>{
-      const rect = b.getBoundingClientRect();
-      if(rect.top < top) b.style.transform = 'translateY(0)', b.style.opacity = 1;
-      else { b.style.transform = 'translateY(20px)'; b.style.opacity = 0.6; }
-    });
-  }
-  document.addEventListener('scroll', reveal);
-  reveal();
-</script>
+    <div class="block">
+      <div class="title">starting of our journey - 2021</div>
+      <img class="photo" src="photo2.jpg" alt="starting of our journey">
+      <div class="caption">yrr ye photo tumhari yrr tumhari aankhein yrr aaj bhi dekh ke wahi feel aane lgta yrr 2021 wala dil bechain ho jata yrr tumhari in ankho ko dekh ke hyyy kya lg rhe😘.</div>
+      <div class="meta">Date: made with ❤️ by your pookie.· Home</div>
+    </div>
+
+    <div class="block">
+      <div class="title">The Golden phase - 2022✨</div>
+      <img class="photo" src="photo3.jpg" alt="2022">
+      <div class="caption">yrr tumhe yaad hai maine iss photo ke liye tumse kitni jidd ki thi yrr itni pyari lgti ye pic me meri baby ❤️ sb kuch rewind ho jata bs ye dekh ke chup chup ke milna kaise kaise baat krna sb kuch .</div>
+      <div class="meta">this is for my sweetheart 🥰</div>
+    </div>
+
+    <div class="block">
+      <div class="title">The Cozy winters - 2023</div>
+      <img class="photo" src="photo4.jpg" alt="bday">
+      <div class="caption">hyyy yrrr kitne cute lg rhe, chmkna bnd kro nhi to mai bhi kmbl me ghus jaunga 😘</div>
+      <div class="meta">❤️ for my pookie</div>
+    </div>
+
+    <div class="block">
+      <div class="title">Dandiya nights - 2024</div>
+      <img class="photo" src="photo5.jpg" alt="roadtrip">
+      <div class="caption">Ek sundar si pari ki sitaro si chamkti aankho me dekhta hua ek nadan ✨.</div>
+      <div class="meta">#fairiesarereal ✨</div>
+    </div>
+
+    <div class="block">
+      <div class="title">12 Jan ✨</div>
+      <img class="photo" src="photo6.jpg" alt="holi">
+      <div class="caption">yrr kitna sukoon tha tumhari baho me, sirf mai,tum aur tumhari ye bahein.</div>
+      <div class="meta"></div>
+    </div>
+
+    <div class="block">
+      <div class="title">Farewell - 2k25 ✨</div>
+      <img class="photo" src="photo7.jpg" alt="dinner">
+      <div class="caption">yrr ye din kitni pyari lg rhi thi tum saari me 🥰 aur bina sareee me aur khtrnak 🌚 </div>
+      <div class="meta">pengu 🐧 ko kuch chaiye bhej do nhi to gussa ho jaega pengu👹</div>
+    </div>
+
+    <div class="block">
+      <div class="title">Holi - 2k25</div>
+      <img class="photo" src="photo17.jpg" alt="concert">
+      <div class="caption">Yrr paper ka wo last din aur hmare school life ka bhi last din ✨ 4 salo ka ye safar kuch iss trh khtm hua .</div>
+      <div class="meta">#forever❤️</div>
+    </div>
+
+    <div class="block">
+      <div class="title">Together 🥰</div>
+      <img class="photo" src="photo9.jpg" alt="picnic">
+      <div class="caption">Yrr kitne pyare lgte ho tum sath me wo din bhi kitni jldi beet gya yrr tumhare sath time itna jldi bitne lgta yrr kya khu khi tum koi jaado to nhi krdete jaise mere Dil me kiya hai.</div>
+      <div class="meta">memories never fade ✨</div>
+    </div>
+
+    <div class="block">
+      <div class="title">Coming soon 2k25...💫</div>
+      <img class="photo" src="photo10.jpg" alt="random">
+      <div class="caption"></div>
+      <div class="meta">made with ❤️ by your panda</div>
+    </div><div style="text-align:center; margin-top:40px;">
+  <a href="friends.html" 
+     style="display:inline-block;
+            padding:16px 36px;
+            background:linear-gradient(135deg,#ff4fa3,#ffb199);
+            color:#fff;
+            font-weight:700;
+            text-decoration:none;
+            border-radius:40px;
+            box-shadow:0 8px 25px rgba(255,79,163,.4);
+            transition:transform .2s;">
+    Go to Wishes 💌
+  </a>
+</div>
+  </div>
 </body>
 </html>
