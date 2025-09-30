@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Friend Wishes</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;font-family:Inter,Arial,system-ui;background:#f6f7fb;display:flex;justify-content:center;padding:28px;}
+  .wrap{width:960px;max-width:96%;background:#fff;border-radius:12px;padding:18px;box-shadow:0 20px 50px rgba(0,0,0,0.06)}
+  header{display:flex;justify-content:space-between;align-items:center}
+  header h2{margin:0}
+  .friend{display:flex;gap:14px;align-items:flex-start;padding:14px;border-radius:10px;border:1px solid rgba(0,0,0,0.04);margin-top:12px;background:#fff}
+  .thumb{width:96px;height:96px;border-radius:10px;overflow:hidden;flex:0 0 96px}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .meta{flex:1}
+  .name{font-weight:700;margin:0}
+  .wish{margin:6px 0;color:#444}
+  .video{margin-top:8px;border-radius:8px;overflow:hidden}
+  .video video{width:100%;height:auto;display:block}
+  @media(max-width:700px){ .friend{flex-direction:column;align-items:center;text-align:center} .thumb{width:140px;height:140px} .meta{width:100%} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h2>Birthday Wishes from Friends</h2>
+      <div>
+        <a href="index.html">Home</a> · <a href="memories.html">Memories</a>
+      </div>
+    </header>
+
+    <!-- 10 friend blocks (photo + written + video). Replace images/videos with your files -->
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="friend1"></div>
+      <div class="meta">
+        <p class="name">Aman</p>
+        <p class="wish">Happy Birthday Shreya! Keep shining and smiling — lots of love ❤️</p>
+        <div class="video">
+          <!-- sample mp4; replace with your friend's video file like friend1.mp4 -->
+          <video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video>
+        </div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1545996124-1b2f6b8a8f76?q=80&w=800&auto=format&fit=crop" alt="friend2"></div>
+      <div class="meta">
+        <p class="name">Riya</p>
+        <p class="wish">Have the best day ever! Miss you and love you lots 💕</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop" alt="friend3"></div>
+      <div class="meta">
+        <p class="name">Karan</p>
+        <p class="wish">Wishing you all the happiness. Keep rocking! 🎉</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1545996124-1b2f6b8a8f76?q=80&w=800&auto=format&fit=crop" alt="friend4"></div>
+      <div class="meta">
+        <p class="name">Sneha</p>
+        <p class="wish">Happy birthday! Can't wait to celebrate with you. 🎂</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="friend5"></div>
+      <div class="meta">
+        <p class="name">Vikram</p>
+        <p class="wish">All the best! Hope your day is as special as you are.</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1545996124-1b2f6b8a8f76?q=80&w=800&auto=format&fit=crop" alt="friend6"></div>
+      <div class="meta">
+        <p class="name">Neha</p>
+        <p class="wish">Big hugs and lots of love on your birthday! 💐</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="friend7"></div>
+      <div class="meta">
+        <p class="name">Rahul</p>
+        <p class="wish">May your year be full of adventures and smiles. Cheers! 🥂</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1545996124-1b2f6b8a8f76?q=80&w=800&auto=format&fit=crop" alt="friend8"></div>
+      <div class="meta">
+        <p class="name">Priya</p>
+        <p class="wish">Have a blast! You deserve all the love and happiness.</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="friend9"></div>
+      <div class="meta">
+        <p class="name">Aisha</p>
+        <p class="wish">Lots of love! Can't wait to see you soon. ❤️</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+    <div class="friend">
+      <div class="thumb"><img src="https://images.unsplash.com/photo-1545996124-1b2f6b8a8f76?q=80&w=800&auto=format&fit=crop" alt="friend10"></div>
+      <div class="meta">
+        <p class="name">Sameer</p>
+        <p class="wish">Best wishes! Enjoy every moment today. 🎈</p>
+        <div class="video"><video controls src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"></video></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
